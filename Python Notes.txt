@@ -1,0 +1,224 @@
+
+
+Quotient:
+>>> 18%4
+2
+
+Normal division:
+>>> 18/4
+4.5
+
+Round down:
+>>> 18//4
+4
+
+
+Power:
+>>> 5**2
+25
+
+Variables:
+>>> tuna=5
+>>> 20+tuna*5
+45
+
+-----------------------------------------------------------------------------------
+
+String:
+-------
+>>> "Kushal is Awesome"
+'Kushal is Awesome'
+
+>>> 'yeah he is'
+'yeah he is'
+
+For now double or single quote is fine.
+
+>>> "I don't think she is 18"  /had to use the double quotes
+"I don't think she is 18"
+
+Escape Character:
+>>> 'We\'ll'
+"We'll"
+
+Printing on screen:
+>>> print("Hey now")
+Hey now 
+
+>>> print('C:\Kushal\Desktop\new')  /n will make it go to new line
+C:\Kushal\Desktop
+ew
+
+So we need to do like:
+>>> print('C:\Kushal\Desktop\\new')
+C:\Kushal\Desktop\new
+
+OR:
+
+>>> print(r'C:\Kushal\Desktop\new')  // using r will escape all the characters.
+C:\Kushal\Desktop\new
+
+
+>>> FN="Kushal"
+>>> SN="Pradhan"
+>>> FN+SN
+'KushalPradhan'
+>>> FN * 4
+'KushalKushalKushalKushal'
+
+----------------------------------------------------------------------------------------------
+
+>>> user="Tuna McFish"
+>>> user[0]
+'T'
+>>> user[78]
+Traceback (most recent call last):
+  File "<pyshell#51>", line 1, in <module>
+    user[78]
+IndexError: string index out of range
+>>> user[-1]  -1 is for the last character
+'h'
+>>> user[-2]
+'s'
+
+>>> user[2:7]  2 is inclusive and 7 is exclusive
+'na M
+
+
+>>> user[:7]
+'Tuna Mc'
+>>> user[2:]
+'na McFish'
+
+
+>>> len(user) // gives the length of the string or variable
+11
+
+
+
+----------------------------------------------------------------------------------------
+
+List:
+
+>>> players=[29,58,34,29,15,88]
+>>> players[3]
+29
+
+
+>>> players[3]=30  //replaced the value
+>>> players
+[29, 58, 34, 30, 15, 88]
+
+>>> players+[1, 2, 3] Can add to the list
+[29, 58, 34, 30, 15, 88, 1, 2, 3]
+>>> players // but the original list of players will be the same. If you want then assign it to the new variable
+[29, 58, 34, 30, 15, 88]
+
+
+>>> players.append(10)  //append permanently adds to the list
+>>> players
+[29, 58, 34, 30, 15, 88, 10]
+
+>>> players[:2]=[11,22]
+>>> players
+[11, 22, 34, 30, 15, 88, 10]
+
+Deleting items:
+
+>>> players[:2]=[]
+>>> players
+[34, 30, 15, 88, 10]
+
+Delete all the elements:
+>>> players[:]=[]
+>>> players
+[]
+
+
+-----------------------------------------------------------------------------------------
+
+
+Installed Pycharm for Python IDE:
+
+
+if :
+----
+
+name = "aman"
+if name is "Kushal":
+    print("You are not Lucy ")
+elif name is "lucy":
+    print("what up Lucy")
+elif name is "aman":
+    print("what up Bigdog")
+else:
+    print("I donn know you")
+
+
+
+
+for :
+------
+
+foods = ['pizza', 'burger', 'wings', 'chips', 'sandwich']
+for f in foods:
+    print(f)
+
+for f in foods[:2]:
+    print(f)
+    print(len(f))
+
+-----------------------------------------------------------------
+
+
+
+Range:
+-------
+
+for x in range(10):
+    print(x)
+    gives from 0 to 9
+
+for x in range(10,15):
+    print(x)
+	gives from 10 to 14
+
+for x in range(10,20,2):
+    print(x)
+    gives 10 12 14 16 18
+
+
+
+While:
+-------
+
+kushal = 5
+while kushal < 10:
+    print(kushal)
+    kushal +=1
+
+
+------------------------------------------------------------
+
+
+break and continue:
+----------------------
+
+magicNumber = 12
+
+for x in range(1,101):
+    if x is magicNumber:
+        print("magic number is ", x, " wala")
+        break
+    else:
+        print(x)
+
+
+
+ # is the single line comment
+ multiline comment is done as:
+
+ ...
+ wala this is multiline comment
+ haha
+ ...
