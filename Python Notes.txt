@@ -222,3 +222,230 @@ for x in range(1,101):
  wala this is multiline comment
  haha
  ...
+
+ Continue:
+ --------
+    numbersTaken = [2, 5, 12, 14, 15, 17, 18]
+    print("Here are the numbers still available: ")
+    for x in range(1, 20):
+        if x in numbersTaken:
+            continue
+        print(x)
+
+Continue keep going through the loop but skip certain.
+
+
+---------------------------------------------------------------
+
+
+Functions:
+----------
+def wala():
+    print("Dayme, functions are cool")
+
+wala()  // callling the function
+
+def NPR_to_USD( npr):
+    amount= npr /97
+    print(amount)
+
+NPR_to_USD(100)
+
+
+
+Return Values:
+---------------
+def allowed_dating_age(my_age):
+    girl_age = my_age/2 + 7;
+    return girl_age
+
+print("Allowed age is: " , allowed_dating_age(23))
+
+
+
+Default Values for Arguments:
+------------------------------
+ 
+
+ def get_gender(sex="unknown"):
+    if sex is 'm':
+        sex ="Male"
+    elif sex is 'f':
+        sex = "Female"
+    print(sex)
+
+get_gender('m')
+get_gender('f')
+get_gender()
+
+
+
+Variable Scope:
+---------------
+
+def corn():
+    a = 868
+    print(a)
+
+def fudge():
+    print(a)
+
+corn()
+fudge() // this will give error as a is defined inside a function
+
+
+
+KeyWord Arguments:
+-------------------
+def dumb_sentence(name="Kushal", action="ate", item="tuna"):
+    print(name, action, item)
+
+dumb_sentence()
+dumb_sentence("Sallie", "farts", "gently")
+dumb_sentence(item="Pizza", action="loves")
+
+Result:
+    Kushal ate tuna
+    Sallie farts gently
+    Kushal loves Pizza
+
+
+Flexible number of arguments:
+------------------------------
+
+def add_numbers(*args):
+    total = 0
+    for a in args:
+        total +=a
+    print(total)
+
+add_numbers(3)
+add_numbers(23,232)
+add_numbers(4,4,23,2)
+
+
+
+Unpacking arguments:
+--------------------
+
+def health_calculator(age, apple_you_ate, cigs_smoked):
+    answer = (100-age)+(apple_you_ate*3.5)-(cigs_smoked*2)
+    print(answer)
+
+data_kushal=[27,4,0]
+health_calculator(*data_kushal)  // * is for unpacking the data for arguments
+
+
+
+Sets:
+-----
+Unique collection of item unlike list.
+
+
+groceries_list=['cerals', 'milk', 'starcrunch', 'beer', 'lotion', 'beer']
+groceries_set={'cerals', 'milk', 'starcrunch', 'beer', 'lotion', 'beer'}
+print(groceries_list)
+print(groceries_set)
+
+result:
+['cerals', 'milk', 'starcrunch', 'beer', 'lotion', 'beer']
+{'beer', 'lotion', 'starcrunch', 'milk', 'cerals'}
+
+
+
+Dictionary:
+-----------
+They have keys and values.
+
+classmates={'Tony':'cool but smells', 'aman':'cool but hungry', 'kushal':'always awesome'}
+print(classmates["aman"])
+
+Result:
+    cool but hungry
+
+
+
+classmates = {'Tony':'cool but smells', 'aman':'cool but hungry', 'kushal':'always awesome'}
+
+for k,v in classmates.items():   // here .items() is different
+    print(k, "is", v)
+
+    Result:
+        kushal is always awesome
+        aman is cool but hungry
+        Tony is cool but smells
+
+
+
+Modules:
+--------
+In a one file:
+
+def fish():
+    print("I am  a Tuna fish")
+
+In other file:
+    import Tuna
+    import random
+
+    Tuna.fish()
+    x=random.randrange(1,100)
+    print(x)
+
+
+
+Downloading an image from web page:
+-------------------------------------
+
+import random
+import  urllib.request
+
+def downloadWebImage(url):
+    name = random.randrange(1,1000)
+    full_name= str(name)+".jpg"
+    urllib.request.urlretrieve(url,full_name)
+
+downloadWebImage("http://www.arsenal.com/assets/_files/scaled/696x392/oct_14/gun__1412238694_welbeck_gala4.jpg")
+
+
+
+
+how to read and write Files:
+----------------------------
+
+fw = open('sample.txt','w')
+fw.write("Hello from the python \nIs this a new line")
+fw.write("\nwala")
+fw.close()
+
+fr = open('sample.txt','r')
+text_read = fr.read()
+fr.close()
+print(text_read)
+
+
+Downloading file from the web:
+--------------------------------
+
+from urllib import request
+
+google_url = 'http://real-chart.finance.yahoo.com/table.csv?s=GOOG&d=10&e=20&f=2014&g=d&a=2&b=27&c=2014&ignore=.csv'
+
+def download_stock_data(csv_url):
+    response = request.urlopen(csv_url)  #connect to the URL
+    csv = response.read()
+    csv_string = str(csv)  # converting to the string
+
+    lines = csv_string.split("\\n")
+    dest_url = r'google.csv'  #r is for raw
+    fx = open(dest_url,'w')  # opened the file
+    for line in lines:
+        fx.write(line + "\n")
+
+download_stock_data(google_url)
+
+
+
+How to build a web Crawler:
+---------------------------
+
