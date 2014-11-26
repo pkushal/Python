@@ -449,3 +449,299 @@ download_stock_data(google_url)
 How to build a web Crawler:
 ---------------------------
 
+Beautifulsoup4 is a package that can go through the data in the url and sort
+
+import requests
+from bs4 import BeautifulSoup
+
+def trade_spider(max_pages):
+    page = 1
+
+    while page <= max_pages:
+        url = 'https://buckysroom.org/trade/search.php?page='+str(page)
+        source_code = requests.get(url)  # gets the source code
+        plain_text = source_code.text  # extracts the plain text only
+
+        #Now we will convert it into beautiful soup object
+        soup = BeautifulSoup(plain_text)
+        for link in soup.findAll('a', {'class': 'item-name'}):  # here 'a' is for the links
+            href = "https://buckysroom.org"+link.get('href')
+            title = link.string # to get the string in the link, i.e., title
+            print(href)
+            print(title)
+        print("outta loop")
+        page += 1
+
+trade_spider(1)
+
+
+-----------------------------
+
+
+import requests
+from bs4 import BeautifulSoup
+
+def trade_spider(max_pages):
+    page = 1
+
+    while page <= max_pages:
+        url = 'https://buckysroom.org/trade/search.php?page='+str(page)
+        source_code = requests.get(url)  # gets the source code
+        plain_text = source_code.text  # extracts the plain text only
+
+        #Now we will convert it into beautiful soup object
+        soup = BeautifulSoup(plain_text)
+        for link in soup.findAll('a', {'class': 'item-name'}):  # here 'a' is for the links
+            href = "https://buckysroom.org"+link.get('href')
+            title = link.string
+            #print(href)
+            #print(title)
+            get_single_item_data(href) # here we are going inside each link
+        print("outta loop")
+        page += 1
+
+def get_single_item_data(item_url):
+        source_code = requests.get(item_url)
+        plain_text = source_code.text
+        soup = BeautifulSoup(plain_text)
+        for item_name in soup.findAll('div', {'class': 'i-name'}):
+            print(item_name.string)  # here we are getting the titles on the given url with class as i-name
+        for link in soup.findAll('a'):
+            href = "https://buckysroom.org" + link.get('href') # here we are printing all the url links in the same url
+            print(href)
+trade_spider(1)
+
+
+
+
+
+
+---------------------------------
+
+
+You are the only exception:
+---------------------------
+
+
+tuna = int(input("what is you fave number ? \n"))
+print(tuna)
+# This will give error if user enters anything other than numbers
+-----------
+
+while True:
+    try:
+        number = int(input("what's you fav. number? \n"))
+        print(" So you like " + str(18/number) + " wala")
+        break
+    except ValueError:
+        print("Enter a number.. \n")
+    except ZeroDivisionError:
+        print("Cannot divide by zero")
+    finally:
+        print("Bye bye")
+
+
+
+---------------------------
+
+
+Classes and objects:
+--------------------
+
+class Enemy:
+    life = 3
+
+    def attack(self):
+        print("ouch !")
+        self.life -=1
+    def checkLife(self):
+        if self.life <= 0:
+            print(" I am dead")
+        else:
+            print(str(self.life)+ " life left")
+
+enemy1 = Enemy()
+enemy2 = Enemy()
+enemy1.attack()
+enemy1.attack()
+enemy2.attack()
+enemy1.checkLife()
+enemy2.checkLife()
+
+
+
+--------------------------
+
+
+init:
+-----
+
+class Tuna:
+    def __init__(self): # this is like a constructor
+        print('wala')
+    def swim(self):
+        print("I am swimming")
+flipper = Tuna()
+flipper.swim() # It's gonna print wala and then I am swimming
+
+How to pass values to the initializer:
+------------------------------------
+class Enemy:
+    def __init__(self,x):
+        self.energy = x
+    def get_energy(self):
+        print(self.energy)
+
+jason = Enemy(5)
+sandy = Enemy(18)
+jason.get_energy()
+sandy.get_energy()
+
+
+
+
+---------------------------------------
+
+
+
+Class variable vs instance variable:
+--------------------------------------
+
+class Girl:
+    gender = 'female' # this is the class variable and every girl will have the gender equal to female
+    def __init__(self, name):
+        self.name = name # this is a instance variable, every girl will have different name
+
+r = Girl('Rachel')
+s= Girl('Stanky')
+
+print(r.name)
+print(r.gender + "\n")
+
+print(s.nam)
+print(s.gender)
+
+--------------------------------------
+
+
+Inheritance:
+------------
+
+class Parent:
+    def print_last_name(self):
+        print("Pradhan")
+
+class Child(Parent):
+    def print_first_name(self):
+        print("Kushal")
+    # overriding the Parent class
+
+    def print_last_name(self):
+        print("Obama")
+
+
+
+name = Child() # here () is necessary
+name.print_first_name()
+name.print_last_name()
+
+
+
+Multiple Inheritance:
+-----------------------
+
+class Mario:
+    def move(self):
+        print("I am moving...")
+class Shroom:
+    def eat_shroom(self):
+        print("Now I am big")
+
+class BigMario(Mario, Shroom):
+    pass # when you have nothing to write but you have to write something to avoid syntax error
+
+bm = BigMario()
+bm.eat_shroom()
+bm.move()
+
+----------------------------
+
+
+Threading:
+----------
+
+
+import threading
+
+class KushalMessanger(threading.Thread):
+    def run(self): # special name called run
+        for _ in range(50): # we don't care about the variable so we use _
+            print(threading.current_thread().getName())
+
+x = KushalMessanger(name='send out messages')
+y = KushalMessanger(name='receive messages')
+
+x.start() # goes to the KushalMessanger Class and looks for the run method
+y.start()
+
+
+----------------------------------
+
+
+Word Frequency Counter:
+-------------------------
+
+Go to webpage and count the words used in that website.
+
+
+import requests
+from  bs4 import BeautifulSoup
+import operator
+
+def start(url):
+    word_list =[ ]
+    source_code = requests.get(url).text
+    soup = BeautifulSoup(source_code)
+
+    for post_text in soup.findAll('a', {'class': 'index_singleListingTitles'}):
+        content = post_text.string
+        print(content)
+        words = content.lower().split()
+        for each_words in words:
+            print(each_words)
+            word_list.append(each_words)
+
+start("https://www.thenewboston.com/tops.php?type=text&period=this-month")
+
+Cleaning up the word by removing the punctuations:
+
+import requests
+from  bs4 import BeautifulSoup
+import operator
+
+def start(url):
+    word_list =[ ]
+    source_code = requests.get(url).text
+    soup = BeautifulSoup(source_code)
+
+    for post_text in soup.findAll('a', {'class': 'index_singleListingTitles'}):
+        content = post_text.string
+        print(content)
+        words = content.lower().split()
+        for each_words in words:
+            word_list.append(each_words)
+    clean_Up_List(word_list)
+
+def clean_Up_List (word_list):
+    clean_word_list = []
+    for word in word_list:
+        symbols = "!@#$%^&*()_+<>,./?':;-"
+        for i in range(0, len(symbols)):
+            word = word.replace(symbols[i],"") #replaces a symbol with blank space
+        if len(word) >0:
+            print(word)
+            clean_word_list.append(word)
+
+start("https://www.thenewboston.com/tops.php?type=text&period=this-month")
+
+
