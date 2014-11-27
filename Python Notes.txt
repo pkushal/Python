@@ -745,3 +745,121 @@ def clean_Up_List (word_list):
 start("https://www.thenewboston.com/tops.php?type=text&period=this-month")
 
 
+
+------
+
+Now counting the frequency of the clean words:
+
+
+import requests
+from  bs4 import BeautifulSoup
+import operator
+
+def start(url):
+    word_list =[ ]
+    source_code = requests.get(url).text
+    soup = BeautifulSoup(source_code)
+
+    for post_text in soup.findAll('a', {'class': 'index_singleListingTitles'}):
+        content = post_text.string
+        print(content)
+        words = content.lower().split()
+        for each_words in words:
+            word_list.append(each_words)
+    clean_Up_List(word_list)
+
+def clean_Up_List (word_list):
+    clean_word_list = []
+    for word in word_list:
+        symbols = "!@#$%^&*()_+<>,./?':;-"
+        for i in range(0, len(symbols)):
+            word = word.replace(symbols[i],"") #replaces a symbol with blank space
+        if len(word) >0:
+            print(word)
+            clean_word_list.append(word)
+    create_dictionary(clean_word_list)
+
+def create_dictionary(clean_word_list):
+    word_count = {}
+    for word in clean_word_list:
+        if word in word_count:
+            word_count[word] += 1
+        else:
+            word_count[word] = 1
+
+    for key, value in sorted(word_count.items(),key = operator.itemgetter(1) ): # operator allows us to work with data types
+                   print(key, value)                                                             # 1 for sort by value, 0 for sort by key
+
+
+
+start("https://www.thenewboston.com/tops.php?type=text&period=this-month")
+
+
+-------------------------
+
+
+
+Unpack List or Tuples:
+----------------------
+
+month, name, price = ['December', 'bread glover', 14]
+print(name)
+
+
+def drop_first_last(grades):
+    first, *middle, last = grades # this will store the first and last element on the variable first and last and remaining on the variable list called middle
+    avg = sum(middle)/len(middle)
+    print(avg)
+
+drop_first_last([65, 76, 98, 54, 21])
+
+
+---------------------
+
+
+Zip:
+----
+first = ['bucky', 'tom', 'taylor']
+last = ['roberts', 'hanks', 'swift']
+
+names = zip (first, last)
+# it will make something like [('bucky','roberts'),('tom','hanks'),('taylor','swift')]
+
+for a, b in names:
+    print(a,b)
+
+
+-----------------------------
+
+
+Lambda:
+-------
+
+answer = lambda x: x*2
+print(answer(25))
+
+# lambda is a small function that don't have any name
+# It can be used in the case like: Button(text = "click me", command = lambda:)
+
+------------------------------
+
+Min, Max and Sort:
+-------------------
+
+stocks = {
+    'GOOG': 520.45,
+    'FB': 76.45,
+    'YHOO': 39.28,
+    'AAPL': 99.76
+}
+# you cannot sort the dictionary but can sort zip's first column
+zip(stocks.values(), stocks.keys()) # sorts by value
+print(min(zip(stocks.values(), stocks.keys())))
+print(max(zip(stocks.values(), stocks.keys())))
+print(sorted(zip(stocks.values(), stocks.keys())))
+
+print("----------------------------------------------------")
+
+print(min(zip(stocks.keys(), stocks.values()))) # sorts by keys
+print(max(zip(stocks.keys(), stocks.values())))
+print(sorted(zip(stocks.keys(), stocks.values())))
